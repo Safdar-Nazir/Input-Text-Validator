@@ -1,6 +1,6 @@
-# input_text_validator
+# Input Text Validator
 
-A new Flutter project.
+A new Flutter project for the validation of Input Text..
 
 ## Getting Started
 
