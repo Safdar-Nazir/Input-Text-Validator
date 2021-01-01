@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:input_text_validator/constant.dart';
 import 'package:input_text_validator/size_config.dart';
+import 'package:input_text_validator/widgets/custom_button.dart';
+import 'package:input_text_validator/widgets/text_field.dart';
 
 class Body extends StatefulWidget {
   @override
@@ -8,7 +10,14 @@ class Body extends StatefulWidget {
 }
 
 class _BodyState extends State<Body> {
+  bool _obsecureText;
+
   @override
+  void initState() {
+    _obsecureText = false;
+    super.initState();
+  }
+
   Widget build(BuildContext context) {
     return SafeArea(
       child: SingleChildScrollView(
@@ -56,74 +65,29 @@ class _BodyState extends State<Body> {
                 SizedBox(
                   height: getScreenHeight(20),
                 ),
-                InputTextField(hintText: 'Password', obsecureText: true),
+                InputTextField(
+                  hintText: 'Password',
+                  obsecureText: !_obsecureText,
+                  icon: _obsecureText ? Icons.visibility : Icons.visibility_off,
+                  onPressed: () {
+                    setState(() {
+                      _obsecureText = !_obsecureText;
+                    });
+                  },
+                ),
                 SizedBox(
                   height: getScreenHeight(20),
                 ),
                 Padding(
                   padding: const EdgeInsets.all(6.0),
-                  child: FlatButton(
+                  child: CustomButton(
+                    buttonText: 'Sign in',
                     onPressed: () {},
-                    child: Text(
-                      'Sign in',
-                      style: TextStyle(
-                        color: kSecondaryColor,
-                        fontSize: 18,
-                      ),
-                    ),
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(5),
-                    ),
-                    color: kPrimaryColor,
-                    padding: EdgeInsets.symmetric(
-                        horizontal: getScreenWidth(152),
-                        vertical: getScreenHeight(20)),
                   ),
                 ),
               ],
             ),
           ],
-        ),
-      ),
-    );
-  }
-}
-
-class InputTextField extends StatelessWidget {
-  const InputTextField({
-    Key key,
-    @required this.hintText,
-    this.icon,
-    @required this.obsecureText,
-  }) : super(key: key);
-
-  final String hintText;
-  final IconData icon;
-  final bool obsecureText;
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      margin: EdgeInsets.symmetric(
-        horizontal: getScreenWidth(10),
-      ),
-      decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(5),
-          border: Border.all(color: kSecondaryColor)),
-      child: TextField(
-        obscureText: obsecureText,
-        decoration: InputDecoration(
-          hintStyle: TextStyle(fontSize: 17),
-          hintText: hintText,
-          suffixIcon: IconButton(
-            icon: Icon(
-              icon,
-            ),
-            onPressed: () {},
-            color: kSecondaryColor,
-          ),
-          border: InputBorder.none,
-          contentPadding: EdgeInsets.all(15),
         ),
       ),
     );
