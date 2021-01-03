@@ -9,12 +9,13 @@ class InputTextField extends StatelessWidget {
     this.icon,
     @required this.obsecureText,
     this.onPressed,
+    this.validator,
   }) : super(key: key);
 
   final String hintText;
   final IconData icon;
   final bool obsecureText;
-  final Function onPressed;
+  final Function onPressed, validator;
 
   Widget build(BuildContext context) {
     return Container(
@@ -28,7 +29,8 @@ class InputTextField extends StatelessWidget {
         ),
       ),
       child: TextFormField(
-        validator: (value) {},
+        keyboardType: TextInputType.emailAddress,
+        validator: validator,
         obscureText: obsecureText,
         decoration: InputDecoration(
           hintStyle: TextStyle(fontSize: 17),

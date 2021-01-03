@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:input_text_validator/constant.dart';
+import 'package:input_text_validator/screens/sign_in.dart';
 import 'package:input_text_validator/size_config.dart';
-import 'package:input_text_validator/widgets/custom_button.dart';
-import 'package:input_text_validator/widgets/text_field.dart';
 
 class Body extends StatefulWidget {
   @override
@@ -10,14 +9,7 @@ class Body extends StatefulWidget {
 }
 
 class _BodyState extends State<Body> {
-  bool _obsecureText;
-
   @override
-  void initState() {
-    _obsecureText = false;
-    super.initState();
-  }
-
   Widget build(BuildContext context) {
     return SafeArea(
       child: SingleChildScrollView(
@@ -55,38 +47,7 @@ class _BodyState extends State<Body> {
             SizedBox(
               height: getScreenHeight(20),
             ),
-            Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                InputTextField(
-                  hintText: 'Email',
-                  obsecureText: false,
-                ),
-                SizedBox(
-                  height: getScreenHeight(20),
-                ),
-                InputTextField(
-                  hintText: 'Password',
-                  obsecureText: !_obsecureText,
-                  icon: _obsecureText ? Icons.visibility : Icons.visibility_off,
-                  onPressed: () {
-                    setState(() {
-                      _obsecureText = !_obsecureText;
-                    });
-                  },
-                ),
-                SizedBox(
-                  height: getScreenHeight(20),
-                ),
-                Padding(
-                  padding: const EdgeInsets.all(6.0),
-                  child: CustomButton(
-                    buttonText: 'Sign in',
-                    onPressed: () {},
-                  ),
-                ),
-              ],
-            ),
+            SignInForm(),
           ],
         ),
       ),
